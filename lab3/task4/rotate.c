@@ -3,12 +3,21 @@
 
 void rotate_4(int *p_a, int*p_b, int*p_c, int* p_d) {
     //TO-DO: please implement left rotate 4 integers by one position
+    int temp = *p_a;
+    *p_a = *p_b;
+    *p_b = *p_c;
+    *p_c = *p_d;
+    *p_d = temp;
 }
 
 int main(int argc, char ** argv) {
     //TO-DO check if there are 4 inputs.
     //print out an error message if there are not enough inputs.
     //hint: use argc
+    if(argc <= 4){
+      printf("  Error: rotate needs four numbers\n");
+      return 0;
+    }
     int a = atoi(argv[1]); //atoi converts string to int
     int b = atoi(argv[2]);
     int c = atoi(argv[3]);
