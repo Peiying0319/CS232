@@ -55,11 +55,11 @@ int main(void)
 	// Such code represents a block, which may have its own local variables.
 
 	int n = 7;
-	printf("main : m=%d, n=%d\n", m, n);
+	printf("main : m=%d, n=%d\n", m, n);//m=1,n=7
 	U(n);
-	printf("main : m=%d, n=%d\n", m, n);
+	printf("main : m=%d, n=%d\n", m, n);//m=7,n=7
 	A();
-	printf("main : m=%d, n=%d\n\n\n", m, n);
+	printf("main : m=%d, n=%d\n\n\n", m, n);//globalm=5, A:m=3
 
 	// -------------------------------------------------
 	// Below is a block, which may declare its own local
@@ -72,9 +72,9 @@ int main(void)
 		// -------------------------------------------------
 		int n = 100;
 
-		printf("block : m=%d, n=%d\n", m, n);
+		printf("block : m=%d, n=%d\n", m, n);//m=5,n=100
 		U(n);
-		printf("block : m=%d, n=%d\n", m, n);
+		printf("block : m=%d, n=%d\n", m, n);//m=100,n=100
 		// -------------------------------------------------
 		// A local variable m is now declared.
 		// References to m from here to the end of the
@@ -82,15 +82,15 @@ int main(void)
 		// -------------------------------------------------
 		int m = -40;
 
-		printf("block : m=%d, n=%d\n", m, n);
+		printf("block : m=%d, n=%d\n", m, n);//m=-40,n=100
 		val(m);
-		printf("block : m=%d\n", m);
+		printf("block : m=%d\n", m);//m=-40
 		addr(&m);
-		printf("block : m=%d\n", m);
+		printf("block : m=%d\n", m);//m=-40
 
 	}
 
-	printf("main : m=%d, n=%d\n\n\n", m, n);
+	printf("main : m=%d, n=%d\n\n\n", m, n);//m=5,n=7 ---- I am not so sure
 	//
 	// ---------------------------------------------------------------------
 	return 0;
@@ -116,7 +116,7 @@ void A(void)
 	int m = 3;
        {
 		extern int m;
-		m = 5; 
+		m = 5;
 		printf("  global m=%d\n",  m);
 	}
 	printf("   A: m=%d\n", m);
