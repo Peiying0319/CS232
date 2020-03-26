@@ -1,5 +1,4 @@
-#include <assert.h>a = slist_find(list, "a" );
-
+#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
