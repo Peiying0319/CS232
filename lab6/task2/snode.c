@@ -25,3 +25,25 @@ void snode_destroy(struct snode * s)
  free(s);
 
 };
+
+char * snode_get_str(struct snode *s)
+{
+    if(s)
+        return s->str;
+    return NULL;
+}
+
+void snode_set_str(struct snode *s, char *str)
+{
+    strcpy(s->str, str);
+}
+
+void snode_set_next(struct snode *s, struct snode *next)
+{
+    s->next = next;
+}
+
+struct snode *snode_get_next(struct snode *s)
+{
+    return s->next;
+}

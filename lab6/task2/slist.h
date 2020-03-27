@@ -39,7 +39,6 @@
 struct slist {
   struct snode *front; // front node
   struct snode *back;  // back node
-  int size;
 };
 
 /**
