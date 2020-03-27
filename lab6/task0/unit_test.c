@@ -11,7 +11,7 @@
 	test_##fn();
 
 typedef struct snode node_t;
-typedef struct slist list_t;
+typedef struct slist list_t;git
 
 // Tests
 static void

@@ -11,3 +11,7 @@ struct snode {
 //length
 struct snode *snode_create(char *s) ;
 void snode_destroy(struct snode * s) ;
+char * snode_get_str(struct snode *s);
+void snode_set_str(struct snode *s, char *str);
+void snode_set_next(struct snode *s, struct snode *next);
+struct snode *snode_get_next(struct snode *s);
