@@ -12,6 +12,7 @@ struct slist *slist_create()
     struct slist *s = malloc(sizeof(struct slist));
     s->front = NULL;
     s->back = NULL;
+    s->size = 0;
     return s;
 }
 
@@ -33,6 +34,7 @@ struct snode* slist_add_back(struct slist *l, char *str)
         l->back->next = new_node;
         l->back = l->back->next;
     }
+    l->size++;
     return new_node;
 }
 
@@ -51,6 +53,7 @@ struct snode* slist_add_front(struct slist *l, char *str)
     l->front = new_node;
     if (!l->back)
         l->back = l->front;
+    l->size++;
     return new_node;
 }
 
@@ -86,6 +89,7 @@ void slist_destroy(struct slist *l)
         current = current -> next;
         snode_destroy(tmp);
     }
+    l->size = 0;
 
 }
 
@@ -111,13 +115,7 @@ void slist_traverse(struct slist *l)
  */
 uint32_t slist_length(struct slist *l)
 {
-    uint32_t len = 0;
-    struct snode *current = l->front;
-    while (current) {
-        len++;
-        current = current -> next;
-    }
-    return len;
+    return l->size;
 }
 /**
  * Deletes the first snode with the given string.
@@ -139,6 +137,7 @@ struct snode* slist_delete(struct slist *l, char *str)
             l->front = l->front->next;
             current->next = NULL;
         }
+        l->size--;
         return current;
     }
     while (current->next) {
@@ -146,6 +145,7 @@ struct snode* slist_delete(struct slist *l, char *str)
             struct snode *tmp = current->next;
             current->next = current->next->next;
             tmp->next = NULL;
+            l->size--;
             return tmp;
         }
         current = current -> next;
@@ -161,4 +161,32 @@ struct snode * slist_get_front(struct slist *l)
 struct snode * slist_get_back(struct slist *l)
 {
     return l->back;
+}
+
+struct snode * slist_find_at(struct slist *l, int index)
+{
+    int i;
+    struct snode *current = l->front;
+    if (l->size ==0 || l->size < index *-1)
+        return NULL;
+    if (index == 0) {
+        return l->front;
+    }
+    if (index == -1) {
+        return l->back;
+    }
+    if (index > 0) {
+        for (i = 0; i < index; i++) {
+            current = current -> next;
+        }
+        if (!current)
+            return l->back;
+        else
+            return current;
+    } else {
+        for (i = 0; i < l->size + index; i++) {
+            current = current -> next;
+        }
+        return current;
+    }
 }
