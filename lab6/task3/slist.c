@@ -12,7 +12,6 @@ struct slist *slist_create()
     struct slist *s = malloc(sizeof(struct slist));
     s->front = NULL;
     s->back = NULL;
-    s->size = 0;
     return s;
 }
 
@@ -27,9 +26,13 @@ struct slist *slist_create()
 struct snode* slist_add_back(struct slist *l, char *str)
 {
     struct snode *new_node = snode_create(str);
-    l->back->next = new_node;
-    l->back = new_node;
-    l->size = l->size + 1;
+    if(!l->back) {
+        l->back = new_node;
+        l->front = l->back;
+    } else {
+        l->back->next = new_node;
+        l->back = l->back->next;
+    }
     return new_node;
 }
 
@@ -46,7 +49,8 @@ struct snode* slist_add_front(struct slist *l, char *str)
     struct snode *new_node = snode_create(str);
     new_node->next = l->front;
     l->front = new_node;
-    l->size = l->size + 1;
+    if (!l->back)
+        l->back = l->front;
     return new_node;
 }
 
@@ -107,7 +111,13 @@ void slist_traverse(struct slist *l)
  */
 uint32_t slist_length(struct slist *l)
 {
-    return (uint32_t) (l->size);
+    uint32_t len = 0;
+    struct snode *current = l->front;
+    while (current) {
+        len++;
+        current = current -> next;
+    }
+    return len;
 }
 /**
  * Deletes the first snode with the given string.
@@ -118,13 +128,24 @@ uint32_t slist_length(struct slist *l)
  */
 struct snode* slist_delete(struct slist *l, char *str)
 {
+    if (!l->front || !l->back)
+        return NULL;
     struct snode *current = l->front;
+    if(strcmp(current->str,str) == 0) { // case: remove first node
+        if (l->back == l->front) {
+            l->front = NULL;
+            l->back = NULL;
+        } else {
+            l->front = l->front->next;
+            current->next = NULL;
+        }
+        return current;
+    }
     while (current->next) {
         if(strcmp(current->next->str, str) == 0) { // Found
             struct snode *tmp = current->next;
             current->next = current->next->next;
             tmp->next = NULL;
-            l->size = l->size - 1;
             return tmp;
         }
         current = current -> next;
