@@ -1,4 +1,15 @@
 1.What instructions evaluate “a>6”?
-2.What happens if we delete the “jmp” instruction?
-3.Can you rewrite the condition with “jg” in place of “jle”? Why or why not?
+    A:cmpl $6,-4(%ebp)
 
+2.What happens if we delete the “jmp” instruction?
+    A: .L2 function will be called again for condition a>6.
+
+3.Can you rewrite the condition with “jg” in place of “jle”? Why or why not?
+    A:If you rewrite the condition, you will need to do jg .L2
+        addl $2,-12(%ebp)
+        jmp .L3
+.L2:
+        addl $-2,-12(%ebp)
+.L3:
+        leave
+        ret

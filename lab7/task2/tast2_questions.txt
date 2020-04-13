@@ -1,8 +1,20 @@
-1.What instruction is “int a, b, c, d;” converted to? 
+1.What instruction is “int a, b, c, d;” converted to?
+    A: subl $16, %esp.
 
-2.Does “int a, b, c, d;” shrink or grow the stack? How many bytes are allocated on stack for a, b, c, and d? Explain them using instruction from question 1.
+2.Does “int a, b, c, d;” shrink or grow the stack? How many bytes are allocated on stack for a, b, c, and d?
+Explain them using instruction from question 1.
+    A: They grows the stack. subl $16, %esp allocated 16 bytes of space on the stack.
 
 3.What instruction is “b=2;” converted to? How is the address of variable b formed in the instruction?
+    A: movl $2, -8(%ebp). The address of variable b formed based on the %ebp, the stack pointer increasing by
+     going down, it goes down 4 bytes for variable a, and goes down 8 bytes from variable b.
 
-4.Based on the instructions converted from four assignments, can we claim the declaration order determines the allocation order? For instance, a is declared before b, does it mean a is to be allocated before b on stack? Verify your theory by changing the declaration to “int a, c, b, d;”
-
+4.Based on the instructions converted from four assignments, can we claim the declaration order determines
+ the allocation order? For instance, a is declared before b, does it mean a is to be allocated before b on stack?
+  Verify your theory by changing the declaration to “int a, c, b, d;”
+    A: YES. The declaration "int a,b,c,d" will be allocated based on the %ebp. If I changed the declaration to "int a,c,b,d;" ,
+     the allocated order will change. The allocation order for the original declaration is, and for the updated declaration is,
+        movl $1,-4(%ebp)                                      movl $1,-4(%ebp)
+        movl $2,-8(%ebp)                                      movl $2,-12(%ebp)
+        movl $3,-12(%ebp)                                     movl $3,-8(%ebp)
+        movl $4,-16(%ebp)                                     movl $4,-16(%ebp)

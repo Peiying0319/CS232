@@ -1,3 +1,8 @@
-1.By searching the function name “strcmp” in the assembly text, what instruction calls strcmp?
-2.Where is the password “secret” stored?
+1.By searching the function name “strcmp” in the assembly text, what instruction
+calls strcmp?
+    A:call strcmp
 
+2.Where is the password “secret” stored?
+    A:Before the strcmp is called, the "secret" is stored in the stack 
+    [password:.byte 0x73,0x65,0x63,0x72,0x65,0x74,0x73,0x0]. After strcmp
+     is called, the "secret" is popped from the stack, its no longer exist.
