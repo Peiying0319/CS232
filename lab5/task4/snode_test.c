@@ -10,9 +10,9 @@ struct snode *n1, *n2, *n3, *p;
 int main(int argc, char *argv[]) {
 
   // create snodes
-  n1 = snode_create("hello", 5);
-  n2 = snode_create("there", 5);
-  n3 = snode_create("prof", 4);
+  n1 = snode_create("hello");
+  n2 = snode_create("there");
+  n3 = snode_create("prof");
 
   printf("snode_test running...\n");
 
@@ -25,9 +25,12 @@ int main(int argc, char *argv[]) {
   p = n1;
 
   while (p != NULL) {
-    // Complete this line to print the current node's string and   
+    int len;
+    // Complete this line to print the current node's string and
     // the stored length (do not use strlen!)
-    printf("str: %s - length: %d\n" // TODO
+    for (len = 0; p->str[len] != '\0'; ++len);
+    printf("str: %s - length: %d\n", p->str, len);
+    p = p->next;
 
     // TODO: add code to move p to point to next node
     // until you add this line, this program will have an infinite loop.

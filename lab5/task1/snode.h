@@ -6,4 +6,3 @@ struct snode {
   int length;
   struct snode *next;
 };
-
