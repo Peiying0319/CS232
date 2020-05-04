@@ -5,13 +5,13 @@
 
 int main(int argc, char **argv) {
 	mystring_t *s;
-	
+
 	printf("Calling mystring_new()\n");
 	s = mystring_new();
-	
+
 	printf("Calling mystring_delete()\n");
 	mystring_delete(s);
-	
+
 	printf("mystring_new() again\n");
 	s = mystring_new();
 
@@ -54,6 +54,6 @@ int main(int argc, char **argv) {
         mystring_delete(s);
 
 	printf("Test complete.\n");
-	
+
 	return 0;
 }
