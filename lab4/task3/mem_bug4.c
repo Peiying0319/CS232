@@ -26,9 +26,15 @@ mytype_t ** allocate(int n){
   return mytypes;
 }
 
-void deallocate(mytype_t ** mytypes){
+void deallocate(mytype_t ** mytypes, int n){
 
   /*Complete me*/
+  int i;
+  for (i = 0; i < 10; i++) {
+      free(mytypes[i]->a);
+      free(mytypes[i]);
+  }
+  free(mytypes);
 
 }
 
@@ -47,5 +53,5 @@ int main(){
     printf(" ]\n");
   }
 
-  deallocate(mytypes);
+  deallocate(mytypes, 10);
 }
