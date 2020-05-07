@@ -29,8 +29,12 @@ int main()
 
 bool is_prime(int n) {
 	//if n is divisible by any number greater or equal to 2 and less than n, then n is not prime.
-	bool flag = true;
-	for (int i = 2; i < n; i++) {
+    int i;
+    bool flag = true;
+    // Initialize
+
+
+	for (i = 2; i < n; i++) {
 		if (n%i == 0) {
 			flag = false;
 			break;
