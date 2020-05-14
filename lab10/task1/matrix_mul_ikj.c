@@ -1,6 +1,6 @@
 #include "syscall.h"
 #include "stdio.h"
-#define Dim 32
+#define Dim 	32
 
 int A[Dim][Dim];
 int B[Dim][Dim];
@@ -19,8 +19,8 @@ main()
 	}
 
     for (i = 0; i < Dim; i++)		/* then multiply them together */
-	for (j = 0; j < Dim; j++)
-            for (k = 0; k < Dim; k++)
+	for (k = 0; k < Dim; k++)
+            for (j = 0; j < Dim; j++)
 		 C[i][j] += A[i][k] * B[k][j];
 
     printf("C[%d][%d] = %d\n", Dim-1, Dim-1, C[Dim-1][Dim-1]);
